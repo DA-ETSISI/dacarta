@@ -1,0 +1,5 @@
+# created by virtualenv automatically
+.venv/bin
+.venv/
+dacarta/settings.py
+db.sqlite3
