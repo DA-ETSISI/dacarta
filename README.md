@@ -39,7 +39,6 @@ DATABASES = {
         "PASSWORD": "contraseña",
         "USER": "user",
         "NAME": "name",
-    }
 }
 ```
 ### 2.2 Explanation of Parameters
