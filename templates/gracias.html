@@ -1,10 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>DA-nos tu opinión</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gracias por tu opinión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 90%;
+            width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #0066db;
+            box-sizing: border-box;
+            text-align: center;
+            margin-top: 20px;
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            color: black;
+            padding: 10px 0;
+        }
+        h1 span {
+            color: #0066db;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+        p {
+            text-align: justify;
+            line-height: 1.6;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .back-button {
+            display: inline-block;
+            background: #0066db;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: normal;
+            transition: background 0.3s;
+        }
+        .back-button:hover {
+            background: #004bb5;
+        }
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #999;
+            padding: 10px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 15px;
+                margin-top: 10px;
+            }
+            h1 {
+                font-size: 28px;
+            }
+            .back-button {
+                font-size: 13px;
+                padding: 8px 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Gracias</h1>
+    <div class="container">
+        <h1><span>DA</span>nos tu opinión</h1>
+        <p>¡Gracias por compartir tu opinión con nosotros! Valoramos tu participación y trabajaremos para mejorar juntos la ETSISI.</p>
+        <a href="/" class="back-button">Volver a la página principal</a>
+    </div>
+    <div class="footer">
+        <p><strong>@daetsisi</strong> | <strong>da.etsisi@upm.es</strong></p>
+    </div>
 </body>
 </html>

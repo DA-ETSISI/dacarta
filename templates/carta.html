@@ -1,23 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DA-nos tu opinión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 90%;
+            width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #0066db;
+            box-sizing: border-box;
+            text-align: center;
+            margin-top: 20px; /* Añadido un poco de espacio arriba */
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            color: black;
+            padding: 10px 0;
+        }
+        h1 span {
+            color: #0066db;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+        p {
+            text-align: justify;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 14px;
+            text-align: left;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        button {
+            width: 100%;
+            background: #0066db;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: normal;
+            font-family: Arial, sans-serif;
+        }
+        button:hover {
+            background: #004bb5;
+        }
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #999;
+            padding: 10px;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 15px;
+                margin-top: 10px; /* Espacio más reducido en móviles */
+            }
+            h1 {
+                font-size: 28px;
+            }
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <div>
-
-        <h1>Bienvenidos a DA-nos tu opinión</h1>
-        <p>Desde la delegación de alumnos queremos saber tu opinión y que podemos mejorar en nuestra escuela</p>
-
+    <div class="container">
+        <h1><span>DA</span>nos tu opinión</h1>
+        <p>
+            Desde Delegación queremos escucharte para que entre todos hagamos de la ETSISI un lugar mejor. Tu voz cuenta, y cada idea o propuesta puede marcar la diferencia.
+        </p>
+        <p>
+            ¿Tienes alguna sugerencia sobre la vida en la escuela? ¿Crees que algo podría funcionar mejor? ¡Cuéntanoslo! Nos interesa saber qué opinas sobre la organización académica, las actividades, el ambiente en la escuela o cualquier otro aspecto que creas importante.
+        </p>
+        <p>
+            Queremos una comunidad más participativa, dinámica y conectada. Comparte tu opinión y ayúdanos a construir un entorno donde todos nos sintamos representados. ¡Estamos aquí para escucharte!
+        </p>
+        <form method="POST" action="/">
+            {% csrf_token %}
+            <div>
+                {{ form }}
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
     </div>
-
-    <form action="/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit">
-    </form>
-
+    <div class="footer">
+        <p><strong>@daetsisi</strong> | <strong>da.etsisi@upm.es</strong></p>
+    </div>
 </body>
 </html>
