@@ -1,15 +1,15 @@
 from django.db import models
 
-eriquetas = {
-    "Nl" : "No leido",
-    "Tra" : "Tramitado",
-    "NaT" : "No tramitable",
-    "DA" : "General",
-    "IgS" : "Igualdad",
-    "AaE" : "Estudiantes",
-    "Ca" : "Calidad",
-    "Com" : "Comunicacion"
-}
+eriquetas = (
+    ("Nl", "No leido"),
+    ("Tra", "Tramitado"),
+    ("NoT", "No tramitable"),
+    ("DA", "General"),
+    ("IgS", "Igualdad"),
+    ("AaE", "Estudiantes"),
+    ("Ca", "Calidad"),
+    ("Com", "Comunicacion")
+)
 
 # Create your models here.
 class carta(models.Model):
