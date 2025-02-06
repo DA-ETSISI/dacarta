@@ -6,9 +6,9 @@ from django.contrib import messages
 
 from .models import carta
 
-admin.site.site_header = 'DaCarta'
-admin.site.index_title = 'DaCarta'
-admin.site.site_title = 'DaCarta'
+admin.site.site_header = 'DA-nos tu opinión'
+admin.site.index_title = 'DA-nos tu opinión'
+admin.site.site_title = 'DA-nos tu opinión'
 
 
 class CartaAdmin(admin.ModelAdmin):

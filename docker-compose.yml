@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: mariadb:latest
+    container_name: mariadb_container
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: django_db
+      MYSQL_USER: django_user
+      MYSQL_PASSWORD: django_pass
+      MYSQL_ROOT_PASSWORD: rootpass
+    volumes:
+      - db_data:/var/lib/mysql
+
+  web:
+    build: .
+    container_name: django_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=django_db
+      - DB_USER=django_user
+      - DB_PASSWORD=django_pass
+    volumes:
+      - .:/app
+
+volumes:
+  db_data:
+

@@ -2,4 +2,8 @@
 .venv/bin
 .venv/
 dacarta/settings.py
+./db.sqlite3
+.gitignore
+.idea/
 db.sqlite3
+dacarta/db.cnf
