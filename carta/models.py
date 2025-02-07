@@ -8,7 +8,8 @@ eriquetas = (
     ("IgS", "Igualdad"),
     ("AaE", "Estudiantes"),
     ("Ca", "Calidad"),
-    ("Com", "Comunicacion")
+    ("Com", "Comunicacion"),
+    ("Ev", "Eventos"),
 )
 
 # Create your models here.

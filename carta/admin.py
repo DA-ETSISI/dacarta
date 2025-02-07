@@ -14,6 +14,7 @@ admin.site.site_title = 'DA-nos tu opinión'
 class CartaAdmin(admin.ModelAdmin):
     list_display = ("asunto", "fecha", "etiqueta")
     search_fields = ("asunto", "etiqueta")
+    list_filter = ("etiqueta",)
 
     def MarcarTramitado(modeladmin, request, queryset):
         queryset.update(etiqueta="Tra")
