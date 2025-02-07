@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GestionaDA | DAnos tu opinión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 90%;
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #0066db;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: black;
+            padding: 10px 0;
+        }
+        h1 span {
+            color: #0066db;
+        }
+        p {
+            text-align: justify;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 14px;
+            text-align: left;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            background: #0066db;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: normal;
+            font-family: Arial, sans-serif;
+        }
+        button:hover {
+            background: #004bb5;
+        }
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #999;
+            padding: 10px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                margin: 20px auto;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gestiona<span>DA</span> | <span>DA</span>nos tu opinión</h1>
+        <p>Inicia sesión para acceder a la plataforma y gestionar las propuestas.</p>
+        <form method="POST" action="/gestionada/login/">
+            {% csrf_token %}
+            <div>
+                {{ form }}
+            </div>
+            <button type="submit">Iniciar sesión</button>
+        </form>
+    </div>
+    <div class="footer">
+        <p><strong>@daetsisi</strong> | <strong>da.etsisi@upm.es</strong></p>
+    </div>
+</body>
+</html>

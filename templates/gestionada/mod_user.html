@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GestionaDA | DAnos tu opinión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 90%;
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #0066db;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: black;
+            padding: 10px 0;
+        }
+        h1 span {
+            color: #0066db;
+        }
+        .user-list {
+            list-style: none;
+            padding: 0;
+        }
+        .user-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .user-list a {
+            text-decoration: none;
+            color: #0066db;
+            font-weight: bold;
+        }
+        .delete-form {
+            display: inline;
+        }
+        .delete-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: red;
+            font-size: 16px;
+        }
+        .back-btn {
+            display: block;
+            margin-top: 20px;
+            padding: 10px;
+            background: #0066db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .back-btn:hover {
+            background: #004bb5;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+            background: #f9f9f9;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gestiona<span>DA</span> | <span>DA</span>nos tu opinión</h1>
+        <ul class="user-list">
+            {% for user in users %}
+                <li>
+                    <a href="/gestionada/user/{{ user }}">{{ user }}</a>
+                    <form class="delete-form" method="POST" action="/gestionada/delete/{{ user }}/">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-btn">🗑️</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="/gestionada/" class="back-btn">Volver</a>
+    </div>
+    <div class="footer">
+        <p><strong>@daetsisi</strong> | <strong>da.etsisi@upm.es</strong></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GestionaDA | DAnos tu opinión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 90%;
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #0066db;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: black;
+            padding: 10px 0;
+        }
+        h1 span {
+            color: #0066db;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 14px;
+            text-align: left;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            background: #0066db;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: normal;
+            font-family: Arial, sans-serif;
+        }
+        button:hover {
+            background: #004bb5;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+            background: #f9f9f9;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gestiona<span>DA</span> | <span>DA</span>nos tu opinión</h1>
+        <form method="POST" action="/gestionada/user/{{ user }}/">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar cambios</button>
+        </form>
+        <h2>Asignar Subdelegación</h2>
+        <form method="POST" action="/gestionada/user/{{ user }}/subdelegacion/">
+            {% csrf_token %}
+            <label for="subdelegacion">Subdelegación:</label>
+            <select id="subdelegacion" name="subdelegacion">
+                {% for subdelegacion in subdelegaciones %}
+                    <option value="{{ subdelegacion }}">{{ subdelegacion }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Asignar</button>
+        </form>
+    </div>
+    <div class="footer">
+        <p><strong>@daetsisi</strong> | <strong>da.etsisi@upm.es</strong></p>
+    </div>
+</body>
+</html>

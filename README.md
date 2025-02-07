@@ -39,6 +39,7 @@ DATABASES = {
         "PASSWORD": "contraseña",
         "USER": "user",
         "NAME": "name",
+    }
   }
 ```
 ### 2.2 Explanation of Parameters
@@ -59,6 +60,7 @@ DATABASES = {
   ```sh
   pip install mysqlclient
 
+---
 ## 3. Running the Application
 
 ### 3.1 Running with Docker
@@ -82,6 +84,8 @@ If running without Docker, ensure MariaDB is installed and configured, then star
 ```sh
 python manage.py runserver
 ```
+
+---
 
 ## 4. Additional Notes
 
