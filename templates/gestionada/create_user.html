@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GestionaDA | DAnos tu opinión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 90%;
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #0066db;
+            box-sizing: border-box;
+            text-align: left;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: black;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 span {
+            color: #0066db;
+        }
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0066db;
+            padding: 8px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .nav-bar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            flex-grow: 1;
+            padding: 0 20px;
+        }
+        .nav-links a:nth-child(1) {
+            margin-right: auto;
+        }
+        .nav-links a:nth-child(2) {
+            margin: auto;
+        }
+        .nav-links a:nth-child(3) {
+            margin-left: auto;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 14px;
+            text-align: left;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            background: #0066db;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: normal;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #004bb5;
+            transform: scale(1.05);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+            padding: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gestiona<span>DA</span> | <span>DA</span>nos tu opinión</h1>
+        <nav class="nav-bar">
+            <div class="nav-links">
+                <a href="/gestionada/">Inicio</a>
+                <a href="/gestionada/user/">Usuarios</a>
+                <a href="/gestionada/logout">Logout</a>
+            </div>
+        </nav>
+        <form method="POST" action="/gestionada/register/">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="subdelegacion">Subdelegación:</label>
+            <select id="subdelegacion" name="subdelegacion">
+                {% for subdelegacion in subdelegaciones %}
+                    <option value="{{ subdelegacion }}">{{ subdelegacion }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Crear Usuario</button>
+        </form>
+    </div>
+    <div class="footer">
+        <p><strong>@daetsisi</strong> | <strong>da.etsisi@upm.es</strong></p>
+    </div>
+</body>
+</html>

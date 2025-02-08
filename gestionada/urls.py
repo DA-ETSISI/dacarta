@@ -10,4 +10,5 @@ urlpatterns = [
     path('user/subdelegacion/<str:username>/', views.subdelega_edit),
     path("delete/<str:username>/", views.delete_user),
     path("logout/", views.logout_user),
+    path("register/", views.create_user),
 ]

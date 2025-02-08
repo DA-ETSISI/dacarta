@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import authenticate, login, get_user_model, logout
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.http import HttpResponse
@@ -93,7 +94,38 @@ def delete_user(request, username):
 
 @permission_required("Can change user", login_url="/gestionada/login", raise_exception=False)
 def create_user(request):
-    pass
+    doc_template = loader.get_template("gestionada/create_user.html")
+
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            user = User.objects.create_user(username=form.cleaned_data["username"], email=request.POST["email"],
+                                            password=form.cleaned_data["password1"])
+            dauser = DaUser.objects.create(user_id=user.id,
+                            subdelegacion_id= Subdelegacion.objects.get(name=request.POST["subdelegacion"]).id)
+
+            user.save()
+            dauser.save()
+
+            return redirect(to="/gestionada/")
+
+
+    else:
+        form = UserCreationForm()
+
+    subdelegaciones = []
+    for subdelegacion in Subdelegacion.objects.values_list("name"):
+        subdelegaciones.append(subdelegacion[0])
+
+    ctx = {
+        "form": form,
+        "subdelegaciones": subdelegaciones,
+    }
+
+    doc = doc_template.render(ctx, request)
+    return HttpResponse(doc)
 
 @login_required(login_url="/gestionada/login/")
 def logout_user(request):
