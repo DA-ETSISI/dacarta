@@ -1,18 +1,12 @@
-from importlib.metadata import pass_none
-from urllib.error import HTTPError
-
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login, get_user
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.template import loader
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required, permission_required
-
 
 from gestionada.forms import loginform, EditUserForm
-from gestionada.models import Subdelegacion
+from gestionada.models import Subdelegacion, DaUser
 
 
 # Create your views here.
@@ -73,9 +67,14 @@ def mod_users(request, username):
 
     else:
         form = EditUserForm()
+
+    subdelegaciones = []
+    for subdelegacion in Subdelegacion.objects.values_list("name"):
+        subdelegaciones.append(subdelegacion[0])
+
     ctx = {"form": form,
            "user": user.username,
-           "subdelegaciones": Subdelegacion.objects.values_list("name"),
+           "subdelegaciones": subdelegaciones,
            }
 
     doc = doc_template.render(ctx, request)
@@ -86,9 +85,16 @@ def mod_users(request, username):
 def subdelega_edit(request, username):
     if request.method == "POST":
         userid = User.objects.get(username=username).id
-        subdelegacion = request.POST["subdelegacion"]
+        user = DaUser.objects.get(user_id=userid)
+        user.subdelegacion = Subdelegacion.objects.get(name=request.POST["subdelegacion"])
+        user.save()
+        return redirect(to="/gestionada/user")
 
-    #return HTTPError(code=404)
-
+@permission_required("Can change user", login_url="/gestionada/login", raise_exception=False)
+def delete_user(request, username):
+    if request.method == "POST":
+        user = User.objects.get(username=username)
+        user.delete()
+        return redirect(to="/gestionada/user")
 
 

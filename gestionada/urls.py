@@ -7,5 +7,6 @@ urlpatterns = [
     path('user/<str:username>/', views.mod_users),
     #path('register/', views.register),
     path('login/', views.loginvw, name='login'),
-    path('user/<str:username>/subdelegacion', views.subdelega_edit),
+    path('user/subdelegacion/<str:username>/', views.subdelega_edit),
+    path("delete/<str:username>/", views.delete_user),
 ]
