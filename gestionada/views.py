@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.http import HttpResponse
@@ -47,34 +47,28 @@ def list_users(request):
     return HttpResponse(doc)
 
 @permission_required("Can change user", login_url="/gestionada/login", raise_exception=False)
-def mod_users(request, username):
+def edit_users(request, username):
     user = User.objects.get(username=username)
 
     doc_template = loader.get_template("gestionada/edit_user.html")
 
     if request.method == "POST":
-        form = EditUserForm(request.POST)
 
-        if form.is_valid():
-            if form.cleaned_data["username"] != "":
-                user.username = form.cleaned_data["username"]
-            if form.cleaned_data["email"] != "":
-                user.email = form.cleaned_data["email"]
+        user.username = request.POST["username"]
+        user.email = request.POST["email"]
+        user.save()
 
-            user.save()
-
-            return redirect(to="/gestionada/user")
-
-    else:
-        form = EditUserForm()
+        return redirect(to="/gestionada/user/")
 
     subdelegaciones = []
     for subdelegacion in Subdelegacion.objects.values_list("name"):
         subdelegaciones.append(subdelegacion[0])
 
-    ctx = {"form": form,
+    ctx = {
            "user": user.username,
            "subdelegaciones": subdelegaciones,
+           "username": user.username,
+           "email": user.email,
            }
 
     doc = doc_template.render(ctx, request)
@@ -97,4 +91,11 @@ def delete_user(request, username):
         user.delete()
         return redirect(to="/gestionada/user")
 
+@permission_required("Can change user", login_url="/gestionada/login", raise_exception=False)
+def create_user(request):
+    pass
 
+@login_required(login_url="/gestionada/login/")
+def logout_user(request):
+    logout(request)
+    return redirect(to="/gestionada/")
