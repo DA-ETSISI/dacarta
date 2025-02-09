@@ -131,3 +131,15 @@ def create_user(request):
 def logout_user(request):
     logout(request)
     return redirect(to="/gestionada/")
+
+@login_required(login_url="/gestionada/login/")
+def list_cartas(request):
+    doc_template = loader.get_template("gestionada/list_cartas.html")
+
+
+
+    ctx = {}
+
+    doc = doc_template.render(ctx, request)
+
+    return HttpResponse(doc)

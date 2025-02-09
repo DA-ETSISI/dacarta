@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Cartas - DA-nos tu opinión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #0066db;
+            box-sizing: border-box;
+        }
+        h1 {
+            font-size: 28px;
+            color: #0066db;
+            text-align: center;
+        }
+        .search-filter {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        input[type="text"], select {
+            padding: 8px;
+            font-size: 14px;
+        }
+        input[type="text"] {
+            width: 60%;
+        }
+        .card {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+        .card.visto {
+            background-color: #e0f7fa;
+        }
+        .card .title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0066db;
+        }
+        .card .content {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .card .delete-button {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .card .delete-button:hover {
+            background: darkred;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Cartas - DA-nos tu opinión</h1>
+
+        <!-- Filtro y Buscador -->
+        <div class="search-filter">
+            <form method="GET" action="/">
+                <input type="text" name="q" value="{{ query }}" placeholder="Buscar cartas...">
+                <select name="filtro">
+                    <option value="todos" {% if filtro == 'todos' %}selected{% endif %}>Todos</option>
+                    <option value="tipo1" {% if filtro == 'tipo1' %}selected{% endif %}>Tipo 1</option>
+                    <option value="tipo2" {% if filtro == 'tipo2' %}selected{% endif %}>Tipo 2</option>
+                    <!-- Añadir más tipos según se necesite -->
+                </select>
+                <button type="submit">Filtrar</button>
+            </form>
+        </div>
+
+        <!-- Lista de cartas -->
+        {% for carta in cartas %}
+            <div class="card {% if carta.visto %}visto{% endif %}">
+                <div class="title">{{ carta.titulo }}</div>
+                <div class="content">{{ carta.contenido }}</div>
+
+                {% if not carta.visto %}
+                    <a href="?mark_visto={{ carta.id }}">Marcar como vista</a>
+                {% endif %}
+
+                {% if request.user.is_staff %}
+                    <form method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="carta_id" value="{{ carta.id }}">
+                        <button type="submit" class="delete-button">Eliminar</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

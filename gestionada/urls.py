@@ -11,4 +11,5 @@ urlpatterns = [
     path("delete/<str:username>/", views.delete_user),
     path("logout/", views.logout_user),
     path("register/", views.create_user),
+    path("", views.list_cartas),
 ]
