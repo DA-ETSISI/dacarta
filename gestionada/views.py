@@ -9,7 +9,6 @@ from django.template import loader
 from gestionada.forms import loginform, EditUserForm
 from gestionada.models import Subdelegacion, DaUser
 
-
 # Create your views here.
 def loginvw(request):
     doc_template = loader.get_template("gestionada/login.html")
