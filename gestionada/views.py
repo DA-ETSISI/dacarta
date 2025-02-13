@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import models
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -12,30 +13,34 @@ from gestionada.models import DaUser, Subdelegacion
 
 # Create your views here.
 def loginvw(request):
-    doc_template = loader.get_template("gestionada/login.html")
 
-    if request.method == "POST":
-        form = loginform(request.POST)
+    if 1:
+        doc_template = loader.get_template("gestionada/login.html")
 
-        if form.is_valid():
-            user = authenticate(
-                username=form.cleaned_data["username"],
-                password=form.cleaned_data["password"],
-            )
-            if user is not None:
-                login(request, user)
+        if request.method == "POST":
+            form = loginform(request.POST)
 
-                return redirect(to="/gestionada/")
+            if form.is_valid():
+                user = authenticate(
+                    username=form.cleaned_data["username"],
+                    password=form.cleaned_data["password"],
+                )
+                if user is not None:
+                    login(request, user)
+
+                    return redirect(to="/gestionada/")
+
+        else:
+            form = loginform()
+
+        ctx = {"form": form}
+
+        doc = doc_template.render(ctx, request)
+
+        return HttpResponse(doc)
 
     else:
-        form = loginform()
-
-    ctx = {"form": form}
-
-    doc = doc_template.render(ctx, request)
-
-    return HttpResponse(doc)
-
+        return redirect("/gestionada/")
 
 @permission_required(
     "Can change user", login_url="/gestionada/login", raise_exception=False
@@ -66,6 +71,7 @@ def edit_users(request, username):
 
         user.username = request.POST["username"]
         user.email = request.POST["email"]
+        user.is_superuser = request.POST["admin"]
         user.save()
 
         return redirect(to="/gestionada/user/")
@@ -79,6 +85,7 @@ def edit_users(request, username):
         "subdelegaciones": subdelegaciones,
         "username": user.username,
         "email": user.email,
+        "admin": user.is_superuser,
     }
 
     doc = doc_template.render(ctx, request)
@@ -111,7 +118,9 @@ def delete_user(request, username):
 
 
 @permission_required(
-    "Can change user", login_url="/gestionada/login", raise_exception=False
+    perm="Can change user",
+    login_url="/gestionada/login",
+    raise_exception=False
 )
 def create_user(request):
     doc_template = loader.get_template("gestionada/create_user.html")

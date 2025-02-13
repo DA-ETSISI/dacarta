@@ -81,6 +81,8 @@
             <input type="text" id="username" name="username" value={{ username }}>
             <label for="email">Mail:</label>
             <input type="email" id="email" name="email" value={{ email }}>
+            <input type="hidden" id="admin" name="admin" value=0>
+            <label for="admin">Es admin: <input type="checkbox" id="admin" name="admin" value=1 {% if admin == 1 %} checked {% endif %}> </label>
             <button type="submit">Guardar cambios</button>
         </form>
         <h2>Asignar Subdelegación</h2>
