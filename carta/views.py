@@ -1,10 +1,10 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.template import loader
 from django.views.decorators.csrf import csrf_protect
-from django.shortcuts import redirect
 
 from carta.forms import CartaForm
+
 
 @csrf_protect
 def index(request):
@@ -28,6 +28,7 @@ def index(request):
 
     return HttpResponse(doc)
 
+
 def gracias(request):
 
     ctx = {}
@@ -36,6 +37,3 @@ def gracias(request):
     doc = doc_template.render(ctx)
 
     return HttpResponse(doc)
-
-
-

@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 import gestionada.models as models
 
 # Register your models here.

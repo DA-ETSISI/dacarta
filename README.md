@@ -2,9 +2,9 @@
 
 ## Introduction
 
-The **DA-ETSISI Feedback Platform** is a web application designed to collect and manage feedback from students at ETSISI. The platform allows users to submit their opinions and suggestions to improve academic and extracurricular aspects of the school.  
+The **DA-ETSISI Feedback Platform** is a web application designed to collect and manage feedback from students at ETSISI. The platform allows users to submit their opinions and suggestions to improve academic and extracurricular aspects of the school.
 
-Built with **Django**, the application provides a secure and user-friendly interface to ensure seamless interaction. It is also containerized with **Docker**, making deployment and database management efficient.  
+Built with **Django**, the application provides a secure and user-friendly interface to ensure seamless interaction. It is also containerized with **Docker**, making deployment and database management efficient.
 
 ---
 
@@ -90,7 +90,7 @@ python manage.py runserver
 ## 4. Additional Notes
 
 - **Check your `.env` file**: Ensure database credentials are correctly set.
-- **Apply migrations**: 
+- **Apply migrations**:
 
 ```sh
   python manage.py migrate

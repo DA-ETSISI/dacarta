@@ -1,20 +1,20 @@
-from django.contrib import admin
-
 # Register your models here.
-from django.contrib import admin
-from django.contrib import messages
+from django.contrib import admin, messages
 
 from .models import carta
 
-admin.site.site_header = 'DA-nos tu opinión'
-admin.site.index_title = 'DA-nos tu opinión'
-admin.site.site_title = 'DA-nos tu opinión'
+admin.site.site_header = "DA-nos tu opinión"
+admin.site.index_title = "DA-nos tu opinión"
+admin.site.site_title = "DA-nos tu opinión"
 
 
 class CartaAdmin(admin.ModelAdmin):
-    list_display = ("asunto", "fecha", )
-    search_fields = ("asunto", )
-    #list_filter = ("etiqueta",)
+    list_display = (
+        "asunto",
+        "fecha",
+    )
+    search_fields = ("asunto",)
+    # list_filter = ("etiqueta",)
 
     def MarcarTramitado(modeladmin, request, queryset):
         queryset.update(etiqueta="Tra")
